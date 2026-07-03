@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Size Comparison: Finding the Right Fit for Your Space — The Companion Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDE4D3;
+    --paper-dark: #E2D6BE;
+    --ink: #2B2420;
+    --ink-soft: #5A4F44;
+    --kraft: #9C7148;
+    --kraft-dark: #7C5A38;
+    --plum: #6B4058;
+    --sage: #71805F;
+    --line: #C7B89C;
+    --white-ish: #F7F2E7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--plum);
+    outline-offset: 3px;
+  }
+
+  .stamp-font { font-family: 'Special Elite', monospace; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Header */
+  header {
+    border-bottom: 3px double var(--kraft-dark);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--kraft-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-8deg);
+    flex-shrink: 0;
+  }
+
+  .logo-mark span {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    color: var(--kraft-dark);
+  }
+
+  .logo-text {
+    font-family: 'Special Elite', monospace;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  nav a {
+    position: relative;
+    padding-bottom: 3px;
+    color: var(--ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  nav a.active { color: var(--plum); }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 100%; bottom: 0;
+    height: 1px;
+    background: var(--plum);
+    transition: right 0.25s ease;
+  }
+  nav a:hover::after { right: 0; }
+
+  /* Breadcrumb / back link */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+
+  .back-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--kraft-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--plum); }
+
+  /* Article header */
+  .article-head {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 26px 24px 40px;
+  }
+
+  .card-stamp {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--kraft-dark);
+    border-radius: 20px;
+    color: var(--kraft-dark);
+    margin-bottom: 22px;
+  }
+
+  .article-head h1 {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(28px, 4.4vw, 42px);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--line);
+    border-bottom: 1px dashed var(--line);
+    padding: 14px 0;
+  }
+
+  /* Torn edge divider */
+  .torn-divider {
+    height: 22px;
+    background:
+      linear-gradient(135deg, var(--paper) 25%, transparent 25%) 0 0,
+      linear-gradient(225deg, var(--paper) 25%, transparent 25%) 0 0;
+    background-size: 16px 22px;
+    background-color: var(--paper-dark);
+  }
+
+  /* Article body */
+  .article-body {
+    background: var(--paper-dark);
+    padding: 56px 24px 70px;
+  }
+
+  .prose {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--white-ish);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 48px clamp(24px, 6vw, 64px);
+  }
+
+  .prose h2 {
+    font-family: 'Special Elite', monospace;
+    font-size: 22px;
+    margin: 40px 0 16px;
+    color: var(--ink);
+  }
+
+  .prose h2:first-child { margin-top: 0; }
+
+  .prose p {
+    font-size: 16.5px;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  .prose p strong { color: var(--plum); }
+
+  .prose ul {
+    margin: 0 0 18px 22px;
+    font-size: 16.5px;
+  }
+  .prose li { margin-bottom: 8px; }
+
+  .prose hr {
+    border: none;
+    border-top: 1px dashed var(--line);
+    margin: 40px 0 24px;
+  }
+
+  .prose .signoff {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* Author / community callout */
+  .callout {
+    max-width: 700px;
+    margin: 32px auto 0;
+    background: var(--paper);
+    border: 1px dashed var(--kraft-dark);
+    border-radius: 4px;
+    padding: 26px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .callout p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    max-width: 420px;
+  }
+
+  .callout .btn-primary {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 12px 22px;
+    border-radius: 3px;
+    background: var(--ink);
+    color: var(--white-ish);
+    border: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+  .callout .btn-primary:hover { background: var(--plum); border-color: var(--plum); }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  footer .logo-text { color: var(--paper); }
+
+  footer p.tagline {
+    font-size: 13px;
+    color: #B8AC98;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+
+  .footer-cols {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .footer-col h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #B8AC98;
+    margin-bottom: 14px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13.5px;
+    color: #DCD3C1;
+    margin-bottom: 9px;
+  }
+  .footer-col a:hover { color: var(--paper); }
+
+  .footer-bottom {
+    max-width: 1080px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #4A4038;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #8A8072;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <a href="index.html" class="logo-mark"><span>TCJ</span></a>
+      <div>
+        <a href="index.html" class="logo-text">The Companion Journal</a>
+        <div class="logo-sub">Buying guides & honest comparisons</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#">Buying Guides</a>
+      <a href="#" class="active">Comparisons</a>
+      <a href="#">Care & Maintenance</a>
+      <a href="#">FAQ</a>
+      <a href="#">Community</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html" class="back-link">← Back to all posts</a>
+</div>
+
+<div class="article-head">
+  <span class="card-stamp">Comparison</span>
+  <h1>Size Comparison: Finding the Right Fit for Your Space</h1>
+  <div class="article-meta">
+    <span>July 3, 2026</span>
+    <span>7 min read</span>
+    <span>Comparisons</span>
+  </div>
+</div>
+
+<div class="torn-divider"></div>
+
+<section class="article-body">
+  <article class="prose">
+    <p>I touched on this in my first post, but it's worth breaking down properly, because it's the decision that affects your day-to-day the most — far more than material or price, honestly.</p>
+
+    <h2>Full-Size Models</h2>
+    <p>These offer the most realistic proportions and weight, but they come with real logistical demands: a dedicated storage space (closet, under-bed storage, or a storage case), and enough physical strength to reposition them safely on your own. If you live alone with ample space and don't need to worry about visitors, this is less of a concern.</p>
+
+    <h2>Mid-Size and Torso Options</h2>
+    <p>These significantly reduce the storage and handling challenges while keeping most of the tactile experience people are looking for. They're often the practical middle ground for shared living situations or smaller spaces, and they're much easier to move and store discreetly.</p>
+
+    <h2>Compact and Travel-Friendly Formats</h2>
+    <p>The smallest formats prioritize discretion and ease of storage above all else — they can fit in a drawer or small bag. The trade-off is a more limited experience compared to full-size or mid-size options.</p>
+
+    <h2>Questions Worth Asking Before You Decide</h2>
+    <ul>
+      <li>Do I have a private, lockable space to store this?</li>
+      <li>Can I lift and reposition this size safely by myself?</li>
+      <li>Do I need to worry about roommates, family, or visitors?</li>
+      <li>Is this a long-term investment or something I want to try first?</li>
+    </ul>
+    <p>Answering these honestly before buying saves a lot of regret — sizing is the one factor almost impossible to judge accurately from photos alone.</p>
+
+    <h2>What I'd Recommend for Most First-Time Buyers</h2>
+    <p>Unless you have a very clear, private space already set up, a mid-size or torso option is usually the easier starting point. You can always go bigger later once you know what fits your life.</p>
+
+    <hr>
+    <p class="signoff">What size ended up working best for your situation? Your experience might help someone else avoid the same miscalculation I made.</p>
+  </article>
+
+  <div class="callout">
+    <p>Want to share your own experience or ask a question? Join the community discussion.</p>
+    <a href="#" class="btn-primary">Join the community</a>
+  </div>
+</section>
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo-text">The Companion Journal</div>
+      <p class="tagline">A personal, non-commercial blog — kept to share experience and talk it through with others.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Browse</h5>
+        <a href="#">Buying Guides</a>
+        <a href="#">Comparisons</a>
+        <a href="#">Care & Maintenance</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>The Blog</h5>
+        <a href="#">About</a>
+        <a href="#">Community</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 — The Companion Journal. Informational content, intended for an adult audience.</div>
+</footer>
+
+</body>
+</html>
