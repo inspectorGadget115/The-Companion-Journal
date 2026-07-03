@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My First Purchase: What I Wish I'd Known — The Companion Journal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #EDE4D3;
+    --paper-dark: #E2D6BE;
+    --ink: #2B2420;
+    --ink-soft: #5A4F44;
+    --kraft: #9C7148;
+    --kraft-dark: #7C5A38;
+    --plum: #6B4058;
+    --sage: #71805F;
+    --line: #C7B89C;
+    --white-ish: #F7F2E7;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Source Serif 4', serif;
+    line-height: 1.6;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--plum);
+    outline-offset: 3px;
+  }
+
+  .stamp-font { font-family: 'Special Elite', monospace; }
+  .mono { font-family: 'IBM Plex Mono', monospace; }
+
+  /* Header */
+  header {
+    border-bottom: 3px double var(--kraft-dark);
+    background: var(--paper);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .header-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .logo-mark {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 2px solid var(--kraft-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(-8deg);
+    flex-shrink: 0;
+  }
+
+  .logo-mark span {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    color: var(--kraft-dark);
+  }
+
+  .logo-text {
+    font-family: 'Special Elite', monospace;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+  }
+
+  .logo-sub {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  nav {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+
+  nav a {
+    position: relative;
+    padding-bottom: 3px;
+    color: var(--ink-soft);
+    transition: color 0.2s ease;
+  }
+
+  nav a.active { color: var(--plum); }
+
+  nav a::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 100%; bottom: 0;
+    height: 1px;
+    background: var(--plum);
+    transition: right 0.25s ease;
+  }
+  nav a:hover::after { right: 0; }
+
+  /* Breadcrumb / back link */
+  .breadcrumb {
+    max-width: 760px;
+    margin: 32px auto 0;
+    padding: 0 24px;
+  }
+
+  .back-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--kraft-dark);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .back-link:hover { color: var(--plum); }
+
+  /* Article header */
+  .article-head {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 26px 24px 40px;
+  }
+
+  .card-stamp {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--kraft-dark);
+    border-radius: 20px;
+    color: var(--kraft-dark);
+    margin-bottom: 22px;
+  }
+
+  .article-head h1 {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(28px, 4.4vw, 42px);
+    line-height: 1.25;
+    margin-bottom: 20px;
+  }
+
+  .article-meta {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    border-top: 1px dashed var(--line);
+    border-bottom: 1px dashed var(--line);
+    padding: 14px 0;
+  }
+
+  /* Torn edge divider */
+  .torn-divider {
+    height: 22px;
+    background:
+      linear-gradient(135deg, var(--paper) 25%, transparent 25%) 0 0,
+      linear-gradient(225deg, var(--paper) 25%, transparent 25%) 0 0;
+    background-size: 16px 22px;
+    background-color: var(--paper-dark);
+  }
+
+  /* Article body */
+  .article-body {
+    background: var(--paper-dark);
+    padding: 56px 24px 70px;
+  }
+
+  .prose {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--white-ish);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 48px clamp(24px, 6vw, 64px);
+  }
+
+  .prose h2 {
+    font-family: 'Special Elite', monospace;
+    font-size: 22px;
+    margin: 40px 0 16px;
+    color: var(--ink);
+  }
+
+  .prose h2:first-child { margin-top: 0; }
+
+  .prose p {
+    font-size: 16.5px;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+
+  .prose p strong { color: var(--plum); }
+
+  .prose ul {
+    margin: 0 0 18px 22px;
+    font-size: 16.5px;
+  }
+  .prose li { margin-bottom: 8px; }
+
+  .prose hr {
+    border: none;
+    border-top: 1px dashed var(--line);
+    margin: 40px 0 24px;
+  }
+
+  .prose .signoff {
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 15px;
+  }
+
+  /* Author / community callout */
+  .callout {
+    max-width: 700px;
+    margin: 32px auto 0;
+    background: var(--paper);
+    border: 1px dashed var(--kraft-dark);
+    border-radius: 4px;
+    padding: 26px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .callout p {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    max-width: 420px;
+  }
+
+  .callout .btn-primary {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 12px 22px;
+    border-radius: 3px;
+    background: var(--ink);
+    color: var(--white-ish);
+    border: 1px solid var(--ink);
+    white-space: nowrap;
+  }
+  .callout .btn-primary:hover { background: var(--plum); border-color: var(--plum); }
+
+  /* Footer */
+  footer {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 48px 24px 32px;
+  }
+
+  .footer-inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  footer .logo-text { color: var(--paper); }
+
+  footer p.tagline {
+    font-size: 13px;
+    color: #B8AC98;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+
+  .footer-cols {
+    display: flex;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+
+  .footer-col h5 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #B8AC98;
+    margin-bottom: 14px;
+  }
+
+  .footer-col a {
+    display: block;
+    font-size: 13.5px;
+    color: #DCD3C1;
+    margin-bottom: 9px;
+  }
+  .footer-col a:hover { color: var(--paper); }
+
+  .footer-bottom {
+    max-width: 1080px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid #4A4038;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: #8A8072;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <a href="index.html" class="logo-mark"><span>TCJ</span></a>
+      <div>
+        <a href="index.html" class="logo-text">The Companion Journal</a>
+        <div class="logo-sub">Buying guides & honest comparisons</div>
+      </div>
+    </div>
+    <nav>
+      <a href="#" class="active">Buying Guides</a>
+      <a href="#">Comparisons</a>
+      <a href="#">Care & Maintenance</a>
+      <a href="#">FAQ</a>
+      <a href="#">Community</a>
+      <a href="#">About</a>
+    </nav>
+  </div>
+</header>
+
+<div class="breadcrumb">
+  <a href="index.html" class="back-link">← Back to all posts</a>
+</div>
+
+<div class="article-head">
+  <span class="card-stamp">Buying Guide</span>
+  <h1>My First Purchase: What I Wish I'd Known</h1>
+  <div class="article-meta">
+    <span>July 3, 2026</span>
+    <span>6 min read</span>
+    <span>Guides</span>
+  </div>
+</div>
+
+<div class="torn-divider"></div>
+
+<section class="article-body">
+  <article class="prose">
+    <p>Two years ago, I spent weeks going back and forth before finally deciding. It wasn't really about the price, or even what anyone else might think — it was that I couldn't find an honest review anywhere, written by someone who wasn't trying to sell me something. So I ended up learning as I went, with a few missteps along the way. Here's what I wish I'd read before ordering.</p>
+
+    <h2>TPE or Silicone: The First Question Everyone Asks</h2>
+    <p>Both materials have their fans, and honestly, there's no wrong answer here — just what fits your budget and your priorities best.</p>
+    <p><strong>TPE</strong> (thermoplastic elastomer) feels softer to the touch, costs less, and is often the natural starting point for a first purchase. The trade-off is that it's more porous: it needs more regular care and it's a bit less durable over time.</p>
+    <p><strong>Silicone</strong> generally costs more, but it's non-porous, easier to clean, and holds fine detail (texture, finishing) much better over the long run. It's an investment, but a lot of people in the community feel it pays off if the budget allows.</p>
+    <p>My advice: if this is your first purchase and you're not sure how you'll feel about it long-term, TPE remains a solid way to try things out without committing too much.</p>
+
+    <h2>Size and Weight — the Part Everyone Underestimates</h2>
+    <p>This is probably where I miscalculated the most. You look at photos, you imagine, and you completely forget two very practical things: <strong>where am I going to store this</strong> and <strong>can I actually handle it on my own</strong>.</p>
+    <p>Larger models (over 30 kg / roughly 65 lbs) require real planning: a discreet storage space, sometimes a dedicated cover or case, and enough physical strength to move it safely. If you live with roommates or discretion matters a lot to you, more compact formats or torsos are often much easier to fit into daily life.</p>
+
+    <h2>Budget: What Actually Changes Between Price Ranges</h2>
+    <p>Without giving exact figures (they shift depending on the brand and the season), here's what I've noticed across the tiers:</p>
+    <ul>
+      <li><strong>Entry-level</strong>: fine for getting started, but the finish and long-term durability are more limited.</li>
+      <li><strong>Mid-range</strong>: the best value for most people, with a more reliable material and some customization options.</li>
+      <li><strong>High-end</strong>: much finer detail (texture, articulation, realism), but the price jump is only worth it if those details genuinely matter to you.</li>
+    </ul>
+    <p>My mistake was trying to save money on entry-level for what I thought would be occasional use — and ultimately wishing I'd spent a bit more on something built to last.</p>
+
+    <h2>Discreet Shipping: The Real Question Nobody Wants to Ask</h2>
+    <p>This is usually the biggest hesitation before ordering. Good news: most reputable sellers in this space use plain, unmarked packaging with no indication of contents, and discreet billing on your bank statement. Before ordering, it's always worth checking this directly on the site or with customer service — a seller who answers this clearly is usually a good sign.</p>
+
+    <h2>Care, the Simple Version</h2>
+    <p>Nothing complicated, but it does take consistency:</p>
+    <ul>
+      <li>Clean after every use with a product made for the material (not just any soap)</li>
+      <li>Dry completely before storing, to avoid moisture buildup</li>
+      <li>Store flat or hanging, depending on the model, away from direct light</li>
+    </ul>
+    <p>Skipping this routine is the fastest way to shorten the product's lifespan — something I learned the hard way in year one.</p>
+
+    <h2>What I'd Do Differently</h2>
+    <p>If I were starting over, I'd take more time comparing materials instead of choosing on price alone, and I'd think through storage before picking a size. Nothing dramatic, but it would have saved me some frustration those first few months.</p>
+
+    <hr>
+    <p class="signoff">Had a similar experience — or a completely different one? Comments are open, that's part of why this blog exists.</p>
+  </article>
+
+  <div class="callout">
+    <p>Want to share your own experience or ask a question? Join the community discussion.</p>
+    <a href="#" class="btn-primary">Join the community</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="logo-text">The Companion Journal</div>
+      <p class="tagline">A personal, non-commercial blog — kept to share experience and talk it through with others.</p>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Browse</h5>
+        <a href="#">Buying Guides</a>
+        <a href="#">Comparisons</a>
+        <a href="#">Care & Maintenance</a>
+        <a href="#">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <h5>The Blog</h5>
+        <a href="#">About</a>
+        <a href="#">Community</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 — The Companion Journal. Informational content, intended for an adult audience.</div>
+</footer>
+
+</body>
+</html>
